@@ -1,0 +1,24 @@
+.flexRow{
+    display: -webkit-flex; /* Safari */     
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+/*
+.dropdownContainer{
+    width: 40%;
+    margin: 2% 5em;
+  }
+  */
+/* .countryInformation{
+    flex:1;
+} */
+.countryData{
+    background: white;
+    padding: 5px 30px 30px 30px;
+    background-image: url('../images/atlas.jpg');
+    background-size: 500px 250px;
+}
+.test{
+    color:white;
+}

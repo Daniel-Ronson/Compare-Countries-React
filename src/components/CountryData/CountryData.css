@@ -1,0 +1,9 @@
+.countryInformation{
+    margin: 1em 5em 0em 4em;
+    padding: 5px 10px;
+    border-style: solid;
+    border-color: red;
+    background: rgb(209, 209, 209);
+    color: rgb(58, 38, 38);
+    font-size: 20px;
+}

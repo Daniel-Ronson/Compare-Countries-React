@@ -1,0 +1,10 @@
+.header-text{ /* selecting all elements with class header-text */
+    font-size: 2em; /* font size is double of parent */
+    font-weight: bold; /* make the text bold! */
+  display: inline-block;
+   }
+  
+   .header-container{
+  text-align: center;  
+  
+   }
