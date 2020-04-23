@@ -1,9 +1,13 @@
-Mission:
+## Mission
 Compare the relative size of two countries.  How big is China compared to France?  Most maps skew the size of countries.
 Choose any two countries the world and this app will display each country on the screen, represented by a shape.
 
-About:
+## About
 This App is built using a node.js server which I developed found here: https://github.com/Daniel-Ronson/Compare-Countries
+
+## Coming soon
+- Updates to user interface
+- Game mode: guess which country is bigger
 
 ## Available Scripts
 
