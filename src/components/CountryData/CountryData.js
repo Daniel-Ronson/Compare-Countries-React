@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './CountryData.css'
 import {connect} from 'react-redux'
+import {getCountryData} from '../../api/index'
 const axios = require('axios');
 class CountryData extends React.PureComponent {
         state = {
-            countryData : [],
+            countryData : {},
             isSet: false,
             countryName: '',
             componentId: ''
@@ -12,56 +13,38 @@ class CountryData extends React.PureComponent {
     
 
     //only change state if the incoming props changed
-    componentDidUpdate(prevProps) {
+    async componentDidUpdate(prevProps) {
         if(prevProps.countryName !== this.props.countryName) {
          console.log('updating: ' + prevProps.countryName + ' != ' +  this.props.countryName)
-          this.getData()
+          const countryData = await getCountryData(this.props.countryName)  
+          //set state
+          this.setState({isSet: true,countryData:countryData, componentId: this.props.keys, countryName: this.props.countryName})
+          //redux call
+          this.props.onChangeCountry(this.state.countryData,this.state.countryName,this.state.componentId)
         }
       }
 
-    componentDidMount(){
+    async componentDidMount(){
         console.log('mounting')
-        this.getData()
+        const countryData = await getCountryData(this.props.countryName)          
+        this.setState({isSet: true,countryData:countryData, componentId: this.props.keys, countryName: this.props.countryName});
+
+        //redux call
+        this.props.onChangeCountry(this.state.countryData,this.state.countryName,this.state.componentId)        
     }
 
-    //http GET request
-    getData = () => {
-        axios.get(`http://127.0.0.1:3000/countries/${this.props.countryName}`)
-        .then(response => {
-            const countriesData = response.data.map(el => ({
-                areaKm: el.area,
-                capital: el.capital,
-                population: el.population,
-                flagURL: el.flag,
-                region: el.region,
-                language: el.language
-            }))
-            const returnObject = {
-                flag : true,
-                countryData: countriesData[0]
-            }
-            this.setState({isSet: returnObject.flag,countryData:countriesData[0], countryName:countriesData[0].name, componentId: this.props.keys, countryName: this.props.countryName})
-            this.props.onChangeCountry(this.state.countryData,this.state.countryName,this.state.componentId)
-        })
-        .catch(error =>{
-            console.log(error)
-            return null
-        })
-    }
-    
+ 
     render() {
-        //if the state has been set already, iterate through the state data and produce the output
-        const output = this.state.isSet ? Object.keys(this.state.countryData) //Object.keys get the property names in the object
-        .map((keyName, i) => (
-            <p key={i}>
-            {keyName}: {this.state.countryData[keyName]}
-            </p>
-        )) : <div>...Loading</div> //else, the user cannot connect to node server
-     
+        const {areaKm, capital, population, flagURL, region, language} = this.state.countryData
         return (
             <div className = "countryInformation">
-                <p>{this.props.countryName}</p>
-                <div>{output}</div>
+                 <p>{this.state.countryName}</p> 
+                 <p>areakKm: {areaKm}</p>
+                 <p>capital: {capital}</p>
+                 <p>population: {population}</p>
+                 <p>flag: {flagURL}</p>
+                 <p>region: {region}</p>
+                <p>language: {language}</p>
             </div>
         );
     }
