@@ -47,12 +47,12 @@ class MainContent extends React.Component{
     render(){
         return(
             <div>
-            <div className = "flexRow">
-                <div className="dropdownContainer"> 
-                    <ReactDropdown countryNames ={this.state.countryNames} getCountryName = {this.alterCountryA}/>
-                    <ReactDropdown countryNames ={this.state.countryNames} getCountryName = {this.alterCountryB}/>
+                <div className = "flexRow">
+                    <div className="dropdownContainer"> 
+                        <ReactDropdown countryNames ={this.state.countryNames} getCountryName = {this.alterCountryA}/>
+                        <ReactDropdown countryNames ={this.state.countryNames} getCountryName = {this.alterCountryB}/>
+                    </div>
                 </div>
-            </div>
            
                 <div className = "flexRow " style = {this.countryStyles.countryData}>                 
                     {this.state.countryA !== '' ? <CountryData countryName={this.state.countryA} keys={'A'}/> : null}

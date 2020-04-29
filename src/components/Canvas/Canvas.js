@@ -10,6 +10,14 @@ class Canvas extends Component {
         const width = this.props.areaKmB % 100
         this.setState({canvas:canvas})
     }
+
+    getVh(){
+        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+       
+        console.log ("hieght" + h)
+     }
+
+
     componentDidUpdate(prevProps) {
         if(prevProps.areaKmA !== this.props.areaKmA || prevProps.areaKmB !== this.props.areaKmB) {
             const ctx = this.state.canvas.getContext("2d")
@@ -19,6 +27,7 @@ class Canvas extends Component {
 
             ctx.fillRect(0,0,this.props.areaKmA % 100,this.props.areaKmA % 100);
             ctx.fillRect(50,50,this.props.areaKmB % 100,this.props.areaKmB % 100);
+            this.getVh()
         }
     }
       
